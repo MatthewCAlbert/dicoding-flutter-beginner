@@ -1,11 +1,11 @@
 {
-    "name": "flutter_beginner",
-    "short_name": "flutter_beginner",
+    "name": "Mocation",
+    "short_name": "Mocation",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "Dicoding Flutter Beginner Submission",
+    "description": "Find real life movie set location",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [
