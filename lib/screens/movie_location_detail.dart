@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:mocation/data/locations.dart';
 import 'package:mocation/helper/color.dart';
+import 'package:mocation/helper/map_launcher.dart';
 
 class MovieLocationDetail extends StatelessWidget {
   final LocationData data;
   const MovieLocationDetail({Key? key, required this.data}) : super(key: key);
-  static double maxThumbnailWidth = 1600.0;
+  static double maxThumbnailWidth = 750.0;
 
   @override
   Widget build(BuildContext context) {
@@ -15,6 +16,7 @@ class MovieLocationDetail extends StatelessWidget {
       backgroundColor: ThemeColor.background,
       body: SafeArea(
         child: SingleChildScrollView(
+          padding: const EdgeInsets.fromLTRB(0, 0, 0, 40),
           child: Column(
           children: [
             Center(
@@ -23,16 +25,39 @@ class MovieLocationDetail extends StatelessWidget {
                   Container(
                     alignment: Alignment.centerLeft,
                     padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(data.name, 
-                          textAlign: TextAlign.left,
-                          style: const TextStyle(fontSize: 32, fontWeight: FontWeight.bold,), 
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(data.name, 
+                              textAlign: TextAlign.left,
+                              style: const TextStyle(fontSize: 32, fontWeight: FontWeight.bold,), 
+                            ),
+                            Text(data.location, 
+                              textAlign: TextAlign.left,
+                              style: const TextStyle(fontSize: 16,), 
+                            ),
+                          ],
                         ),
-                        Text(data.location, 
-                          textAlign: TextAlign.left,
-                          style: const TextStyle(fontSize: 16,), 
+                        InkWell(
+                          onTap: () {
+                            Navigator.pop(context);
+                          },
+                          child: Ink(
+                            child: Container(
+                              width: 44,
+                              height: 44,
+                              alignment: Alignment.center,
+                              child: const Icon(
+                                Icons.close,
+                                color: ThemeColor.black,
+                                size: 24.0,
+                                semanticLabel: 'Close Button',
+                              ),
+                            )
+                          )
                         ),
                       ],
                     )
@@ -66,20 +91,72 @@ class MovieLocationDetail extends StatelessWidget {
                           ),
                         ),
 
-                        // TODO: View in Map Button
-
-                        const Padding(padding: EdgeInsets.all(7)),
+                        const Padding(padding: EdgeInsets.all(10)),
                       
-                        const Text('About', 
-                          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold,), 
-                        ),
-                        Text(data.about, 
-                          textAlign: TextAlign.left,
-                          style: const TextStyle(fontSize: 14,), 
-                        ),
+                        Container(
+                          alignment: Alignment.center,
+                          width: screenSize.width > maxThumbnailWidth ? maxThumbnailWidth : screenSize.width,
+                          child: Column(
+                            children: [
+                              InkWell(
+                                onTap: () {
+                                  MapsLauncher.launchCoordinates(data.lat, data.long, data.name);
+                                },
+                                child: Ink(
+                                  child: Container(
+                                    alignment: Alignment.center,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      color: Colors.white,
+                                      boxShadow: const [
+                                        BoxShadow(
+                                          color: Color(0x16000000),
+                                          spreadRadius: 2,
+                                          blurRadius: 5,
+                                        ),
+                                      ],
+                                    ),
+                                    padding: const EdgeInsets.fromLTRB(30, 15, 20, 15),
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: const [
+                                        Icon(
+                                          Icons.map_outlined,
+                                          color: ThemeColor.black,
+                                          size: 24.0,
+                                          semanticLabel: 'Map Icon',
+                                        ),
+                                        Expanded(child: Text('View in Map', 
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: ThemeColor.black), 
+                                        ),)
+                                      ],
+                                    ),
+                                  ),
+                                )
+                              ),
 
-                        // TODO: Favorite Floating Button
-
+                              const Padding(padding: EdgeInsets.all(10)),
+                              Container(
+                                alignment: Alignment.centerLeft,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    const Text('About', 
+                                      textAlign: TextAlign.left,
+                                      style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold,), 
+                                    ),
+                                    const Padding(padding: EdgeInsets.all(3)),
+                                    Text(data.about, 
+                                      textAlign: TextAlign.left,
+                                      style: const TextStyle(fontSize: 14,), 
+                                    ),
+                                  ],
+                                ),
+                              )
+                            ],
+                          ),
+                        )
                       ],
                     ),
                   )

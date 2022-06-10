@@ -5,11 +5,14 @@ import 'package:mocation/screens/movie_detail.dart';
 
 class TrendingItem extends StatelessWidget {
   final MovieData data;
+  final double maxWidth;
 
-  const TrendingItem({Key? key, required this.data}) : super(key: key);
+  const TrendingItem({Key? key, required this.data, required this.maxWidth}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    Size screenSize = MediaQuery.of(context).size;
+
     return InkWell(
       onTap: () {
         Navigator.push(context, MaterialPageRoute(builder: (context) {
@@ -37,8 +40,8 @@ class TrendingItem extends StatelessWidget {
                 clipBehavior: Clip.hardEdge,
                 children: [
                   Image.asset(data.imageDir,
-                    width: MediaQuery.of(context).size.width,
-                    height: MediaQuery.of(context).size.width * 9 / 16,
+                    width: screenSize.width > maxWidth ? maxWidth : screenSize.width,
+                    height: (screenSize.width > maxWidth ? maxWidth : screenSize.width) * 9 / 16,
                     fit: BoxFit.cover,
                   ),
                   Positioned(

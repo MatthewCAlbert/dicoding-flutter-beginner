@@ -6,7 +6,7 @@ import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 class MovieDetail extends StatelessWidget {
   final MovieData data;
-  static double maxThumbnailWidth = 1600.0;
+  static double maxThumbnailWidth = 750.0;
   const MovieDetail({Key? key, required this.data}) : super(key: key);
 
   @override
@@ -16,8 +16,8 @@ class MovieDetail extends StatelessWidget {
     return Scaffold(
       backgroundColor: ThemeColor.background,
       body: SafeArea(
-        child: Container(
-          alignment: Alignment.center,
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.fromLTRB(0, 0, 0, 40),
           child: Column(
           children: [
             Center(
@@ -82,24 +82,32 @@ class MovieDetail extends StatelessWidget {
                               fit: BoxFit.cover),
                           ),
                         ),
+
+                        const Padding(padding: EdgeInsets.all(7)),
                         
-                        const Padding(padding: EdgeInsets.all(7)),
+                        Container(
+                          alignment: Alignment.center,
+                          width: screenSize.width > maxThumbnailWidth ? maxThumbnailWidth : screenSize.width,
+                          child: Column(
+                            children: [
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  const Text('Locations', 
+                                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold,), 
+                                  ),
+                                  Text('${data.locations.length} found', 
+                                    style: const TextStyle(fontSize: 16,), 
+                                  ),
+                                ],
+                              ),
 
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            const Text('Locations', 
-                              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold,), 
-                            ),
-                            Text('${data.locations.length} found', 
-                              style: const TextStyle(fontSize: 16,), 
-                            ),
-                          ],
-                        ),
-
-                        const Padding(padding: EdgeInsets.all(7)),
-                        Column(
-                          children: <Widget>[..._generateLocationList(context)],
+                              const Padding(padding: EdgeInsets.all(7)),
+                              Column(
+                                children: <Widget>[..._generateLocationList(context)],
+                              )
+                            ],
+                          ),
                         )
                       ],
                     ),
@@ -128,6 +136,7 @@ class MovieDetail extends StatelessWidget {
           child: Container(
             width: MediaQuery.of(context).size.width,
             padding: const EdgeInsets.fromLTRB(15, 18, 15, 18),
+            margin: const EdgeInsets.only(bottom: 15),
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(10),
