@@ -15,7 +15,7 @@ Mocation
 ### Features
 
 - [x] A homepage.
-- [ ] Search movies that have real world location.
+- [x] Search movies that have real world location.
 - [x] See a movie locations.
 - [x] See a movie location detail.
 - [x] Responsive Tested for Web.

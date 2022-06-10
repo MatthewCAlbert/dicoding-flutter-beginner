@@ -15,12 +15,35 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   static double maxInnerWidth = 750.0;
-  final TextEditingController _searchQuerycontroller = TextEditingController();
+  final TextEditingController _searchQueryController = TextEditingController();
+  List<MovieListItem> foundMovies = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _findByTitleQuery();
+
+    // Start listening to changes.
+    _searchQueryController.addListener(_findByTitleQuery);
+  }
 
   @override
   void dispose() {
-    _searchQuerycontroller.dispose();
+    _searchQueryController.dispose();
     super.dispose();
+  }
+
+  void _findByTitleQuery() {
+    List<MovieListItem> res = [];
+    for( int i = 0 ; i < LocationRepos.all.length ; i++ ) {
+      var e = LocationRepos.all[i];
+      if (e.title.contains(_searchQueryController.text)) {
+        res.add(MovieListItem(data: e));
+      }
+    }
+    setState(() {
+      foundMovies = res;
+    });
   }
 
   @override
@@ -103,7 +126,7 @@ class _HomeState extends State<Home> {
                                     ),
                                     const Padding(padding: EdgeInsets.all(5)),
                                     Expanded(child: TextField(
-                                      controller: _searchQuerycontroller,
+                                      controller: _searchQueryController,
                                       decoration: const InputDecoration.collapsed(
                                         hintText: 'Find movie name...'
                                       ),
@@ -122,20 +145,7 @@ class _HomeState extends State<Home> {
                                 columnCount: 2,
                                 gap: 10,
                                 padding: EdgeInsets.zero,
-                                children: [
-                                  MovieListItem(
-                                    data: LocationRepos.all.first,
-                                  ),
-                                  MovieListItem(
-                                    data: LocationRepos.all.first,
-                                  ),
-                                  MovieListItem(
-                                    data: LocationRepos.all.first,
-                                  ),
-                                  MovieListItem(
-                                    data: LocationRepos.all.first,
-                                  ),
-                                ],
+                                children: [...foundMovies],
                               )
                             ],
                           ),
