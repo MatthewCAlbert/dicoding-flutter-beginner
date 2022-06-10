@@ -5,7 +5,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 class MapsLauncher {
 
- static String createQueryUrl(String query) {
+ static Uri createQueryUrl(String query) {
   Uri uri;
 
   if (kIsWeb) {
@@ -20,10 +20,10 @@ class MapsLauncher {
       'www.google.com', '/maps/search/', {'api': '1', 'query': query});
  }
 
- return uri.toString();
+ return uri;
  }
 
-static String createCoordinatesUrl(double latitude, double longitude,
+static Uri createCoordinatesUrl(double latitude, double longitude,
   [String? label]) {
  Uri uri;
 
@@ -47,15 +47,15 @@ static String createCoordinatesUrl(double latitude, double longitude,
       {'api': '1', 'query': '$latitude,$longitude'});
  }
 
- return uri.toString();
+ return uri;
  }
 
  static Future<bool> launchQuery(String query) {
-  return launch(createQueryUrl(query));
+  return launchUrl(createQueryUrl(query));
  }
 
  static Future<bool> launchCoordinates(double latitude, double longitude,
   [String? label]) {
- return launch(createCoordinatesUrl(latitude, longitude, label));
+ return launchUrl(createCoordinatesUrl(latitude, longitude, label));
  }
 }
