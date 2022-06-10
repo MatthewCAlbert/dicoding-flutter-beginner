@@ -145,7 +145,7 @@ class _HomeState extends State<Home> {
                                 columnCount: 2,
                                 gap: 10,
                                 padding: EdgeInsets.zero,
-                                children: [...foundMovies],
+                                children: foundMovies,
                               )
                             ],
                           ),
