@@ -28,18 +28,26 @@ class MovieLocationDetail extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(data.name, 
-                              textAlign: TextAlign.left,
-                              style: const TextStyle(fontSize: 32, fontWeight: FontWeight.bold,), 
-                            ),
-                            Text(data.location, 
-                              textAlign: TextAlign.left,
-                              style: const TextStyle(fontSize: 16,), 
-                            ),
-                          ],
+                        Flexible(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                                alignment: Alignment.centerLeft,
+                                child: Text(data.name, 
+                                  textAlign: TextAlign.left,
+                                  style: const TextStyle(fontSize: 32, fontWeight: FontWeight.bold,), 
+                                ),
+                              ),
+                              Container(
+                                alignment: Alignment.centerLeft,
+                                child: Text(data.location, 
+                                  textAlign: TextAlign.left,
+                                  style: const TextStyle(fontSize: 16,), 
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                         InkWell(
                           onTap: () {
@@ -49,7 +57,7 @@ class MovieLocationDetail extends StatelessWidget {
                             child: Container(
                               width: 44,
                               height: 44,
-                              alignment: Alignment.center,
+                              alignment: Alignment.topCenter,
                               child: const Icon(
                                 Icons.close,
                                 color: ThemeColor.black,

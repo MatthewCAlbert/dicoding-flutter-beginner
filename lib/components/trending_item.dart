@@ -58,8 +58,14 @@ class TrendingItem extends StatelessWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(data.title, 
-                            style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white), 
+                          Flexible(
+                            child: Container(
+                              alignment: Alignment.centerLeft,
+                              child: Text(data.title, 
+                                overflow: TextOverflow.ellipsis,
+                                style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white), 
+                              ),
+                            ),
                           ),
                           Container(
                             padding: const EdgeInsets.all(5),

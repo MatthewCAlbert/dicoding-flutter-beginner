@@ -47,10 +47,16 @@ class MovieDetail extends StatelessWidget {
                             )
                           )
                         ),
-                        Text(data.title, 
-                          textAlign: TextAlign.left,
-                          style: const TextStyle(fontSize: 32, fontWeight: FontWeight.bold,), 
-                        ),
+                        Flexible(
+                          child: Container(
+                            alignment: Alignment.centerLeft,
+                            child: Text(data.title, 
+                              textAlign: TextAlign.left,
+                              overflow: TextOverflow.clip,
+                              style: const TextStyle(fontSize: 32, fontWeight: FontWeight.bold,), 
+                            ),
+                          ),
+                        )
                       ],
                     )
                   ),
@@ -129,7 +135,7 @@ class MovieDetail extends StatelessWidget {
           showMaterialModalBottomSheet(
             context: context,
             expand: false,
-            builder: (context) => MovieLocationDetail(data: data.locations.first),
+            builder: (context) => MovieLocationDetail(data: e),
           );
         },
         child: Ink(

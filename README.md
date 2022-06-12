@@ -4,7 +4,7 @@ By Matthew Christopher Albert
 
 ## Submissions
 
-- June x, 2022
+- June 12, 2022
 
 ## Details
  

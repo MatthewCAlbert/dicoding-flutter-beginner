@@ -47,7 +47,7 @@ class MovieListItem extends StatelessWidget {
                     right: 0,
                     child: Container(
                       alignment: Alignment.bottomCenter,
-                      padding: const EdgeInsets.fromLTRB(20, 7, 20, 7),
+                      padding: const EdgeInsets.fromLTRB(12, 7, 12, 7),
                       decoration: const BoxDecoration(
                         gradient: LinearGradient(colors: [Colors.purple, Colors.blue]),
                         borderRadius: BorderRadius.all(Radius.circular(10))
@@ -55,9 +55,15 @@ class MovieListItem extends StatelessWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text(data.title, 
-                            style: const TextStyle(fontSize: 20, fontWeight: FontWeight.normal, color: Colors.white), 
-                          ),
+                          Flexible(
+                            child: Container(
+                              alignment: Alignment.center,
+                              child: Text(data.title, 
+                                overflow: TextOverflow.ellipsis,
+                                style: const TextStyle(fontSize: 20, fontWeight: FontWeight.normal, color: Colors.white), 
+                              ),
+                            ),
+                          )
                         ],
                       ),
                     ),
