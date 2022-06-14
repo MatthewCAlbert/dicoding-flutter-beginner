@@ -1,4 +1,4 @@
-package com.matthewcalbert.flutterbeginner.flutter_beginner
+package com.matthewcalbert.mocation
 
 import io.flutter.embedding.android.FlutterActivity
 
